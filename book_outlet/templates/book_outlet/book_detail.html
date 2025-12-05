@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "book_outlet/base.html" %}
 
-</body>
-</html>
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ title }}</h1>
+    <h2>{{ author }}</h2>
+    <p>The book has a rating of: {{ rating }}
+    {% if  is_best_seller%}
+        and is a bestseller.
+    {% else %}
+        but isn't a bestseller.
+    {% endif %} 
+    </p>
+{% endblock %}
