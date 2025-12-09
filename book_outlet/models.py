@@ -14,17 +14,17 @@ class Book(models.Model):
     slug = models.SlugField(
         default="",
         blank=True,
-        editable=False,
         null=False,
         db_index=True) # Harry Potter 1 => harry-potter-1
 
     def get_absolute_url(self):
         return reverse('book-detail', args=[self.slug])
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
+    # Removed save because functionality for adding a Book is now in /admin/
 
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.title} ({self.rating})"
