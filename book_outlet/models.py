@@ -5,6 +5,16 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+class Country(models.Model):
+    name = models.CharField(max_length=80)
+    code = models.CharField(max_length=2)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Countries"
+
 # From OneToOnField in Author...
 # Address.objects.all()[0].author
 # <Author: J.K. Rowling>
@@ -42,6 +52,7 @@ class Book(models.Model):
         blank=True,
         null=False,
         db_index=True) # Harry Potter 1 => harry-potter-1
+    published_countries = models.ManyToManyField(Country, related_name="books") # many-to-many, related_name instead of book_set
 
     def get_absolute_url(self):
         return reverse('book-detail', args=[self.slug])
